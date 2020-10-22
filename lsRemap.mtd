@@ -1,0 +1,7 @@
+
+[node lsRemap]    
+    maya.name               STRING  "lsRemap"
+    maya.id                 INT     0x0000f1111
+    maya.classification     STRING  "shader/surface"
+    maya.output_name        STRING  "outColor"
+    maya.output_shortname   STRING  "out"

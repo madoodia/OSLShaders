@@ -1,0 +1,7 @@
+
+[node gamma]    
+    maya.name               STRING  "gamma"
+    maya.id                 INT     0x000f1112
+    maya.classification     STRING  "shader/surface"
+    maya.output_name        STRING  "outColor"
+    maya.output_shortname   STRING  "out"

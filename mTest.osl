@@ -1,0 +1,9 @@
+shader mTest(
+  // color tex = texture(filename, u, v),
+  color tex = .5,
+  float exponent = 1,
+  output color Cout = color(0, 0, 0))
+{
+  Cout = tex * exponent;
+  // another line
+}
