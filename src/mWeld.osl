@@ -1,0 +1,79 @@
+// // - For every shading point:
+// // -- Calculate the distance to every curve point
+// // -- Compare distance to user-set welding radius to determine displacement amount (could use a ramp to look up a certain value)
+// // -- If distance to point N is smallest and if distance to point N+1 is also within the radius:
+// // ---- Add displacements of both lookups of N and N+1
+
+// float rand(float n)
+// {
+//   return sin(n) * 43758.5453123 - floor(sin(n) * 43758.5453123);
+// }
+
+// shader weld(
+//     float radius = 0.1,
+//     float disp_height = 1.0,
+//     vector distort = vector(0),
+//     float burn_radius = 1.0,
+
+//     output vector disp_rand_burn = vector(0))
+// {
+//   float x[63] = {}; // manually enter x coords here
+//   float y[63] = {}; // manually enter y coords here
+//   float z[63] = {}; // manually enter z coords here
+//   float distances[63];
+//   int min_dist_cv = 0;
+
+//   vector shading_pos = P;
+//   float min_dist = 9999999999.0;
+//   string input_tex = "D:/madoodia/dev/OSLShaders/weld.png";
+
+//   for (int i = 0; i < 62; i++)
+//   {
+//     point pos = point(x[i], y[i], z[i]);
+//     pos += distort;
+
+//     // find distance between two points
+//     float distance = sqrt((P[0] - pos[0]) * (P[0] - pos[0]) +
+//                           (P[1] - pos[1]) * (P[1] - pos[1]) +
+//                           (P[2] - pos[2]) * (P[2] - pos[2]));
+
+//     distances[i] = distance;
+
+//     if (distance < min_dist)
+//     {
+//       min_dist = distance;
+//       min_dist_cv = i;
+//     }
+//   }
+
+//   if (distances[min_dist_cv] < burn_radius)
+//   {
+//     disp_rand_burn[2] = 1.0 - (distances[min_dist_cv] / burn_radius);
+//   }
+
+//   // int seed = 8;
+
+//   if ((min_dist < radius))
+//   {
+//     float min_dist_norm = min_dist / radius;
+//     float disp_lookup = texture(input_tex, min_dist_norm, 0.0);
+//     disp_rand_burn[0] += disp_lookup;
+//     disp_rand_burn[1] = rand(min_dist_cv / float(62));
+
+//     if (min_dist_cv < 62 && (distances[min_dist_cv + 1] < radius))
+//     {
+//       float min_dist_1_norm = distances[min_dist_cv + 1] / radius;
+//       float disp_lookup = texture(input_tex, min_dist_1_norm, 0.0);
+//       disp_rand_burn[0] += disp_lookup;
+//     }
+
+//     if (min_dist_cv > 0 && (distances[min_dist_cv - 1] < radius))
+//     {
+//       float min_dist_2_norm = distances[min_dist_cv - 1] / radius;
+//       float disp_lookup = texture(input_tex, min_dist_2_norm, 0.0);
+//       disp_rand_burn[0] += disp_lookup;
+//     }
+//   }
+
+//   disp_rand_burn[0] = (disp_rand_burn[0] / 2.0) * disp_height;
+// }

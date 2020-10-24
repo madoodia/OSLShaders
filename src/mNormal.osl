@@ -1,0 +1,13 @@
+shader mNormal
+    [[ string help = "Get the Normal in the specified coordinate space",
+       string label = "Normal",
+       string category = "Scene Attributes" ]](
+        string Coordspace = "object"
+            [[ string widget = "popup",
+               string help = "world, object, camera, shader, screen, NDC, raster, or an explicitly named coordinate system",
+               string options = "world|object|camera|shader|screen|NDC|raster",
+               int editable = 1 ]],
+        output vector Out = 0.0, )
+{
+  Out = transform(Coordspace, N);
+}

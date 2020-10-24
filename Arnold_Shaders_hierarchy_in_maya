@@ -1,0 +1,20 @@
+These items can be used in .mtd file of osl shaders
+in front of 
+maya.classification
+like maya.classification		  STRING	"Shader/Surface"
+------------------
+Shader
+  Surface
+  Volume
+Texture
+  Environment
+Light
+  Filter
+  Volume
+Utility
+  Aov
+  Conversion
+  Math
+  Shader
+  User Data
+  Volume

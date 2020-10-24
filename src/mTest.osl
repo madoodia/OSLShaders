@@ -1,0 +1,20 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+#include "../include/vector2.h"
+// #include "core/core.h"
+
+shader mTest(
+    // color tex = texture(filename, u, v),
+    color tex = .5,
+    float a = 1,
+    float b = 0,
+    float exponent = 1,
+    output color Cout1 = color(0, 0, 0))
+{
+  // x = 2;
+  vector2 m = vector2(a, b);
+  Cout1 = color(m.x, m.y, 0.);
+}

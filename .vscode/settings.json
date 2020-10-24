@@ -1,0 +1,12 @@
+{
+  "editor.formatOnSave": true,
+  "files.autoSave": "onFocusChange",
+  "C_Cpp.dimInactiveRegions": true,
+  "C_Cpp.errorSquiggles": "Disabled",
+  "files.associations": {
+    "*.osl": "cpp"
+  },
+  "files.exclude": {
+    "**/*.oso": true
+  }
+}

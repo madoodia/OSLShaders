@@ -1,0 +1,63 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved! */
+/* --------------------- */
+
+struct vector4
+{
+  float x, y, z, w;
+};
+
+vector4 __operator__add__(vector4 a, vector4 b)
+{
+  return vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+}
+
+vector4 __operator__mul__(vector4 a, vector4 b)
+{
+  return vector4(a.x * b.x, a.y * b.y, a.z * b.z, a.w * b.w);
+}
+
+float HexDist(vector gv)
+{
+  vector p = abs(gv);
+
+  float c = dot(p, normalize(vector(1., 1.73, 1.)));
+  c = max(c, p[0]);
+
+  // return sin(c*10.+iTime);
+  return c;
+}
+
+vector4 HexCoords(point uv)
+{
+  point r = point(1., 1.73, 1.);
+  point h = r * .5;
+  point a = mod(uv, r) - h;
+  point b = mod(uv - h, r) - h;
+
+  point gv = point(0., 0., 1.);
+  if (length(a) < length(b))
+    gv = a;
+  else
+    gv = b;
+
+  point id = uv - gv;
+  float y = .5 - HexDist(gv);
+  float x = 0.;
+
+  return vector4(x, y, id[0], id[1]);
+}
+
+shader hexagonal(
+    float tiling = 10.,
+    float exponent = 1.,
+    output color col = 0.)
+{
+  point uv = point(u, v, 1.);
+
+  uv *= tiling;
+  vector4 hc = HexCoords(uv);
+  float c = 1 - smoothstep(.1, .2, hc.y * hc.w + time * .5);
+  col += c * exponent;
+}

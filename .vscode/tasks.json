@@ -1,0 +1,28 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "shell",
+      "label": "build",
+      "windows": {
+        "command": "${workspaceFolder}/scripts/build.bat",
+      },
+      "linux": {
+        "command": "oslc -v ${workspaceFolder}/src/${fileBasenameNoExtension}.osl -o ${workspaceFolder}/shaders/${fileBasenameNoExtension}.oso",
+      },
+      "osx": {
+        "command": "oslc -v ${workspaceFolder}/src/${fileBasenameNoExtension}.osl -o ${workspaceFolder}/shaders/${fileBasenameNoExtension}.oso",
+      },
+      "args": [
+        "${workspaceFolder}",
+        "${relativeFileDirname}",
+        "${fileBasenameNoExtension}"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

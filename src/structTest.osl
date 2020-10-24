@@ -1,0 +1,15 @@
+struct vector4
+{
+  float x, y, z, w;
+};
+vector4 __operator__add__(vector4 a, vector4 b)
+{
+  return vector4(a.x + b.x, a.y + b.y, a.z + b.z, a.w + b.w);
+}
+shader structTest()
+{
+  vector4 a = vector4(.2, .3, .4, .5);
+  vector4 b = vector4(1, 2, 3, 4);
+  vector4 c = a + b; // Will call __operator__add__(vector4,vector4)
+  printf("a+b = %g %g %g %g\n", c.x, c.y, c.z, c.w);
+}
