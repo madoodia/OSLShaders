@@ -1,6 +1,6 @@
-[node mTest]    
-  maya.name               STRING  "mTest"
-  maya.id                 INT     0x000f0002
+[node mTest2]    
+  maya.name               STRING  "mTest2"
+  maya.id                 INT     0x000f0001
   maya.classification		  STRING	"Shader/Surface"
   maya.output_name        STRING  "outColor"
   maya.output_shortname   STRING  "out"

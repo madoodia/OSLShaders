@@ -1,0 +1,23 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+void changeValue1(output float x) // x is (T &x)
+{
+  x += 1;
+}
+
+float changeValue2(float x) // x is (const T &x)
+{
+  return x + 1;
+}
+
+shader mTest
+    [[string help = "this is just a tests shader"]](
+        output color Cout1 = color(0, 0, 0))
+{
+  float a = 0;
+  changeValue1(a);
+  Cout1 = color(a, 0, 0.);
+}

@@ -4,9 +4,14 @@
   "C_Cpp.dimInactiveRegions": true,
   "C_Cpp.errorSquiggles": "Disabled",
   "files.associations": {
-    "*.osl": "cpp"
+    "*.vssettings": "xml",
+    "*.osl": "cpp",
+    "vector": "cpp",
+    "random": "cpp",
+    "algorithm": "cpp"
   },
   "files.exclude": {
-    "**/*.oso": true
-  }
+    "**/*.oso": false
+  },
+  "C_Cpp.clang_format_path": ""
 }

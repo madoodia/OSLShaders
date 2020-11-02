@@ -1,0 +1,18 @@
+// surface wood
+//     [[string help = "Realistic wood shader"]](
+//         float Kd = 0.5
+//             [[ string help = "Diffuse reflectivity",
+//                float min = 0, float max = 1 ]],
+//         color woodcolor = color(.7, .5, .3)
+//             [[string help = "Base color of the wood"]],
+//         color ringcolor = 0.25 * woodcolor
+//                                      [[string help = "Color of the dark rings"]],
+//         string texturename = "wood.tx"
+//             [[ string help = "Texture map for the grain",
+//                string widget = "filename" ]],
+//         int pattern = 0
+//             [[ string widget = "mapper",
+//                string options = "oak:0|elm:1|walnut:2" ]])
+// {
+//   ...
+// }

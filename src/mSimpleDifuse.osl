@@ -3,5 +3,5 @@ shader mSimpleDifuse(
     float opacity = 1.0,
     output closure color result = 0)
 {
-    result = opacity * albedo * diffuse(N) + (1 - opacity) * transparent();
+  result = opacity * albedo * diffuse(N) + (1 - opacity) * transparent();
 }

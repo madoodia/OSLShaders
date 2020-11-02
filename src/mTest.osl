@@ -6,13 +6,15 @@
 #include "../include/vector2.h"
 // #include "core/core.h"
 
-shader mTest(
-    // color tex = texture(filename, u, v),
-    color tex = .5,
-    float a = 1,
-    float b = 0,
-    float exponent = 1,
-    output color Cout1 = color(0, 0, 0))
+shader mTest
+    [[string help = "this is just a tests shader"]](
+        float a = 1,
+        float b = 0
+            [[string label = "parameter b"]],
+        int pattern = 0
+            [[ string widget = "mapper",
+               string options = "oak:0|elm:1|walnut:2" ]],
+        output color Cout1 = color(0, 0, 0))
 {
   // x = 2;
   vector2 m = vector2(a, b);

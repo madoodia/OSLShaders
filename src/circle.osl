@@ -1,0 +1,38 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+color circle(
+    vector uv,
+    point center,
+    float innerRadius,
+    float outerRadius,
+    float width)
+{
+  point p = point(uv[0], uv[1], 0);
+  color col = smoothstep(innerRadius - width, innerRadius, clamp(length(p - center), 0, innerRadius));
+  col -= smoothstep(outerRadius - width, outerRadius, clamp(length(p - center), 0, outerRadius));
+  return col;
+}
+
+shader main(
+    point center = point(.5, .5, 0),
+    float innerRadius = .3,
+    float outerRadius = .4,
+    float width = .01,
+    output color col = 0)
+{
+  vector uv = vector(u, v, 0);
+  float grids = 10;
+  uv *= grids;
+
+  vector gv = fract(uv);
+
+  col = circle(gv, center, innerRadius, outerRadius, width);
+}

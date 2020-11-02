@@ -1,0 +1,79 @@
+vector fract(vector x)
+{
+  return x - floor(x);
+}
+
+shader mTest(output color Cout = color(0, 0, 0))
+{
+  vector uv = vector(u, v, 0.);
+  uv *= 5.;
+
+  vector gv = fract(uv) - .5;
+  //float a = step(.0, gv[0]+gv[1]);
+  // float a = aastep(.0, gv[0] + gv[1]);
+  //float a = linearstep(0.0, 0.2, gv[0]+gv[1]);
+  //float a = smoothstep(0.0, 0.2, gv[0]+gv[1]);
+  //float a = smooth_linearstep(0.0, 0.2, gv[0]+gv[1], 0.8);
+
+  uv *= 5.;
+  // float a = noise("perlin", uv); // or "snoise"
+
+  // float a = noise("uperlin", uv); // or "noise"
+
+  //float a = noise("cell", uv);
+
+  // float a = noise("hash", uv);
+
+  // float a = noise("simplex", uv);
+
+  // float a = noise("usimplex", uv);
+
+  // float a = noise("gabor", uv, "bandwidth", 5.5);
+  // float a = noise("gabor", uv, "anisotropic", 2);
+
+  // float a = noise(uv);
+
+  // float a = pnoise(uv, 2);
+
+  // float a = cellnoise(uv);
+
+  // float a = hash(uv);
+
+  // spline -----------------------
+  /*
+  color Cspline = 0;
+  string bases[6] = {"catmull-rom", "bezier", "bspline", "hermite", "linear", "constant"};
+  color colors[6] = {color(1, 0, 0),
+                     color(0, 1, 0),
+                     color(0, 0, 1),
+                     color(1, 1, 0),
+                     color(1, 0, 1),
+                     color(1, 1, 1)};
+
+  int basis = (int)(v * 6.0);
+  if (basis >= 6)
+    basis = 5;
+
+  color knot_col = colors[basis];
+
+  color colknots[13];
+  colknots[0] = 0.0 * knot_col;
+  colknots[1] = 0.0 * knot_col;
+  colknots[2] = 1.0 * knot_col;
+  colknots[3] = 1.0 * knot_col;
+  colknots[4] = 1.0 * knot_col;
+  colknots[5] = 0.0 * knot_col;
+  colknots[6] = 0.5 * knot_col;
+  colknots[7] = 0.0 * knot_col;
+  colknots[8] = 1.0 * knot_col;
+  colknots[9] = 1.0 * knot_col;
+  colknots[10] = 1.0 * knot_col;
+  colknots[11] = 0.0 * knot_col;
+  colknots[12] = 0.0 * knot_col;
+
+  Cspline = spline(bases[basis], u, colknots);
+  */
+  // spline -----------------------
+
+  Cout += a;
+}
