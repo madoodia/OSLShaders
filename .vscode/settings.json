@@ -8,7 +8,8 @@
     "*.osl": "cpp",
     "vector": "cpp",
     "random": "cpp",
-    "algorithm": "cpp"
+    "algorithm": "cpp",
+    "xstring": "cpp"
   },
   "files.exclude": {
     "**/*.oso": false

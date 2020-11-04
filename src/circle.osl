@@ -26,7 +26,7 @@ shader main(
     float innerRadius = .3,
     float outerRadius = .4,
     float width = .01,
-    output color col = 0)
+    output color Cout = 0)
 {
   vector uv = vector(u, v, 0);
   float grids = 10;
@@ -34,5 +34,5 @@ shader main(
 
   vector gv = fract(uv);
 
-  col = circle(gv, center, innerRadius, outerRadius, width);
+  Cout = circle(gv, center, innerRadius, outerRadius, width);
 }

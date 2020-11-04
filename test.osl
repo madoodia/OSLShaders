@@ -1,0 +1,32 @@
+
+surface paintedplastic
+    [[string description = "Textured plastic material."]](
+        float Kd = 1
+            [[ string description = "Diffuse scaling",
+               float UImin = 0, float UIsoftmax = 1 ]],
+        float Ks = 0.5
+            [[ string description = "Specular scaling",
+               float UImin = 0, float UIsoftmax = 1 ]],
+        float roughness = 0.1
+            [[ string description = "Specular roughness",
+               float UImin = 0, float UIsoftmax = 1 ]],
+        color specularcolor = 1
+            [[ string description = "Specular color",
+               float UImin = 0, float UImax = 1 ]],
+        color Cs = 1
+            [[ string description = "Base color",
+               float UImin = 0, float UImax = 1 ]],
+        string texturename = ""
+            [[ string UIlabel = "Diffuse texture",
+               string description = "Diffuse texture",
+               string UItype = "texture" ]],
+        float s = u
+            [[ string description = "s coordinate for the lookup",
+               float UImin = 0, float UIsoftmax = 1 ]],
+        float t = v
+            [[ string description = "t coordinate for the lookup",
+               float UImin = 0, float UIsoftmax = 1 ]])
+{
+  Ci = Kd * Cs * diffuse(N) * texture(texturename, s, t);
+  Ci += Ks * specularcolor * phong(N, roughness);
+}
