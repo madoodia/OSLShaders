@@ -9,7 +9,10 @@
     "vector": "cpp",
     "random": "cpp",
     "algorithm": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "xutility": "cpp",
+    "regex": "cpp",
+    "xlocale": "cpp"
   },
   "files.exclude": {
     "**/*.oso": false

@@ -1,32 +1,26 @@
+// ColorSpace shader
+// ColorSpace.osl, by Changsoo Eun, adapted by Zap Andersson
+// Modified: 2019-11-22
+// Copyright 2019 Autodesk Inc, All rights reserved. This file is licensed under Apache 2.0 license
+// https://github.com/ADN-DevTech/3dsMax-OSL-Shaders/blob/master/LICENSE.txt
 
-surface paintedplastic
-    [[string description = "Textured plastic material."]](
-        float Kd = 1
-            [[ string description = "Diffuse scaling",
-               float UImin = 0, float UIsoftmax = 1 ]],
-        float Ks = 0.5
-            [[ string description = "Specular scaling",
-               float UImin = 0, float UIsoftmax = 1 ]],
-        float roughness = 0.1
-            [[ string description = "Specular roughness",
-               float UImin = 0, float UIsoftmax = 1 ]],
-        color specularcolor = 1
-            [[ string description = "Specular color",
-               float UImin = 0, float UImax = 1 ]],
-        color Cs = 1
-            [[ string description = "Base color",
-               float UImin = 0, float UImax = 1 ]],
-        string texturename = ""
-            [[ string UIlabel = "Diffuse texture",
-               string description = "Diffuse texture",
-               string UItype = "texture" ]],
-        float s = u
-            [[ string description = "s coordinate for the lookup",
-               float UImin = 0, float UIsoftmax = 1 ]],
-        float t = v
-            [[ string description = "t coordinate for the lookup",
-               float UImin = 0, float UIsoftmax = 1 ]])
+shader ColorSpace
+[[ string help = "Convert RGB / HSV / YIQ / XYZ / xyY",
+   string label = "Color Space",
+   string category = "Math Color" ]]
+(
+	string FromSpace = "hsv"
+  	[[ string widget = "mapper",
+       string options = "rgb:rgb|hsv (hue, saturation, and value):hsv|hsl (hue, saturation, and lightness):hsl|YIQ (for the NTSC television standard):YIQ|XYZ (CIE XYZ coordinates):XYZ|xyY (CIE xyY coordinates):xyY",
+	   string label = "From space:"]],
+	string ToSpace = "rgb"
+  	[[ string widget = "mapper",
+       string options = "rgb:rgb|hsv (hue, saturation, and value):hsv|hsl (hue, saturation, and lightness):hsl|YIQ (for the NTSC television standard):YIQ|XYZ (CIE XYZ coordinates):XYZ|xyY (CIE xyY coordinates):xyY",
+	   string label = "To space:"]],
+	  
+	vector In = 0.0, 	   
+	output color Cout = 0.0,
+)
 {
-  Ci = Kd * Cs * diffuse(N) * texture(texturename, s, t);
-  Ci += Ks * specularcolor * phong(N, roughness);
+	Cout = transformc(FromSpace , ToSpace, In);
 }

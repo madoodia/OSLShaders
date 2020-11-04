@@ -1,0 +1,45 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+color circle(
+    vector UV,
+    point center,
+    float Radius,
+    float Fuzz,
+    vector Scale,
+    float Width,
+    float Angle)
+{
+  point pnt = UV;
+  vector diff = pnt - center;
+
+  diff = rotate(diff, Angle, point(0, 0, 0), point(0, 0, 1));
+  diff /= Scale;
+  color col = 1. - smoothstep(Radius, Radius + Fuzz, length(diff));
+  col *= smoothstep(Radius - Width, Radius - Width + Fuzz, length(diff));
+  return col;
+}
+
+shader main(
+    point center = point(.5, .5, 0),
+    float Radius = .5,
+    float Fuzz = .01,
+    vector Scale = 1,
+    float Width = .1,
+    float Angle = 0.,
+    int grids = 1,
+    output color Cout = 0)
+{
+  vector uv = vector(u, v, 0);
+  uv *= grids;
+  vector gv = fract(uv);
+
+  Cout = circle(gv, center, Radius, Fuzz, Scale, Width, Angle);
+}

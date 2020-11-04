@@ -1,0 +1,35 @@
+float fract(float val)
+{
+  // return abs(fmod(val, 1.)); // wrong way
+  return val - floor(val);
+}
+color myMix(color A, color B, float mixVal)
+{
+  float m = clamp(mixVal, 0, 1);
+  return mix(A, B, m);
+}
+
+float func(float in)
+{
+  // return fract(in);
+  // return sin(radians(M_PI * in));
+  return abs(sin(M_2PI * in));
+}
+
+shader mFirstShader(
+    color A = color(0, 0, .5),
+    color B = color(.5, .5, 0),
+    float Scale = 20.0,
+    output color Cout = color(0, 0, 0))
+{
+
+  // point pnt = transform("world", P) / Scale;
+
+  point pnt = point(u, v, 0) / Scale;
+
+  // uv *= 3;
+  float f = func(pnt[0]);
+  f *= func(pnt[1]);
+
+  Cout = myMix(A, B, f);
+}

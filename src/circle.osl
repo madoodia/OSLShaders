@@ -15,9 +15,9 @@ color circle(
     float outerRadius,
     float width)
 {
-  point p = point(uv[0], uv[1], 0);
-  color col = smoothstep(innerRadius - width, innerRadius, clamp(length(p - center), 0, innerRadius));
-  col -= smoothstep(outerRadius - width, outerRadius, clamp(length(p - center), 0, outerRadius));
+  // point p = point(uv[0], uv[1], 0);
+  color col = smoothstep(innerRadius - width, innerRadius, clamp(length(uv - center), 0, innerRadius));
+  col -= smoothstep(outerRadius - width, outerRadius, clamp(length(uv - center), 0, outerRadius));
   return col;
 }
 

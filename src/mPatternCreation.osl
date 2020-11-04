@@ -9,7 +9,7 @@ shader mTest(output color Cout = color(0, 0, 0))
   uv *= 5.;
 
   vector gv = fract(uv) - .5;
-  //float a = step(.0, gv[0]+gv[1]);
+  float a = step(.0, gv[0] + gv[1]);
   // float a = aastep(.0, gv[0] + gv[1]);
   //float a = linearstep(0.0, 0.2, gv[0]+gv[1]);
   //float a = smoothstep(0.0, 0.2, gv[0]+gv[1]);
