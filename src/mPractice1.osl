@@ -1,0 +1,27 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+shader mPractice1(
+    int Grids = 1,
+    float Radius = .5,
+    float Fuzz = .01,
+    output color Cout = 0)
+{
+  point center = point(.5, .5, 0);
+  vector uv = vector(u, v, 0);
+
+  uv *= Grids;
+  vector gv = fract(uv);
+
+  float d = length(gv - center);
+  float c = smoothstep(Radius, Radius + Fuzz, d);
+
+  Cout = c;
+}

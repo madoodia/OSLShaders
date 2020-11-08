@@ -1,0 +1,29 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+shader mPractice3(
+    int Grids = 10,
+    float R = .05,
+    float Distortaion = 0,
+    output color Cout = 0)
+{
+  float grid_u = floor(Grids * u);
+  float grid_v = floor(Grids * v);
+  // Cout = point(grid_u, grid_v, 0) / Grids;
+
+  point jitter = noise("cell", point(grid_v, grid_v, 0));
+  jitter = 0.5 * (1 - 2 * jitter) * Distortaion * sin(time);
+  jitter[2] = 0;
+
+  point p0 = (point(grid_u + .5, grid_v + 0.5, 0) + jitter) / Grids;
+  point p = point(u, v, 0);
+  if (length(p - p0) < R / Grids)
+    Cout = color(1);
+}

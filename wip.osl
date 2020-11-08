@@ -1,0 +1,38 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+float fract(float val)
+{
+  return val - floor(val);
+}
+
+float nvf(vector uv)
+{
+  point p = fract(uv * vector(654.25, 978.16, 0));
+  p += dot(p, p + 25.76);
+  return fract(p.x * p.y);
+}
+
+vector nvv(vector uv)
+{
+  float n = nvf(uv);
+  return vector(n, nvf(uv + n), 0);
+}
+
+shader mPractice2(
+    output color Cout = 0)
+{
+  point center = point(.5, .5, 0);
+  vector uv = vector(u, v, 0);
+
+  float m = nvv(uv)[1];
+
+  Cout = m;
+}

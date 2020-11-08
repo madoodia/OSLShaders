@@ -7,12 +7,10 @@ set ROOT=%1
 set FOLDER=%2
 set FILE_NAME=%3
 
-@REM echo %ROOT%
-@REM echo %FOLDER%
-@REM echo %FILE_NAME%
-
-
 @REM ------------------------------------
+
+set PATH=%PATH%;%SDKS_LOCATION%/osl_release/bin;%SDKS_LOCATION%/osl_release/lib
+
 
 if not exist "%ROOT%/%FOLDER%/%FILE_NAME%.mtd" (
   @REM del %ROOT%/%FOLDER%/%FILE_NAME%.mtd
@@ -28,6 +26,6 @@ if not exist "%ROOT%/%FOLDER%/%FILE_NAME%.mtd" (
 
 )
 
-oslc -v %ROOT%/%FOLDER%/%FILE_NAME%.osl -o %ROOT%/%FOLDER%/%FILE_NAME%.oso
+oslc.exe -v %ROOT%/%FOLDER%/%FILE_NAME%.osl -o %ROOT%/%FOLDER%/%FILE_NAME%.oso
 
 

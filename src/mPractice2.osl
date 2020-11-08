@@ -1,0 +1,94 @@
+/* --------------------- */
+/* (C) 2020 madoodia.com */
+/*  All Rights Reserved  */
+/* --------------------- */
+
+vector fract(vector uv)
+{
+  return uv - floor(uv);
+}
+
+float fract(float val)
+{
+  return val - floor(val);
+}
+
+float nvf(vector uv)
+{
+  point pnt = fract(uv * vector(1253.34, 5231.73, 0));
+  pnt += dot(pnt, pnt + 23.35);
+  return fract(pnt[0] * pnt[1]);
+}
+
+vector nvv(vector uv)
+{
+  float n = nvf(uv);
+  return vector(n, nvf(uv + n), 0);
+}
+
+vector getPos(vector id, vector offset)
+{
+  // vector n = noise("cell", id) * time;
+  // vector n = noise("perlin", id) * time;
+  vector n = nvv(id + offset) * 2. * time;
+  return offset + sin(n) * .4;
+}
+
+float distLine(vector p, vector a, vector b)
+{
+  vector pa = p - a;
+  vector ba = b - a;
+  float t = clamp(dot(pa, pa) / dot(ba, ba), 0., 1.);
+  return length(pa - ba * t);
+}
+
+float line(vector p, vector a, vector b)
+{
+  float d = distLine(p, a, b);
+  float m = smoothstep(.6, .01, d);
+  return m;
+}
+
+shader mPractice2(
+    int Grids = 1,
+    output color Cout = 0)
+{
+
+  // point center = point(.5, .5, 0);
+  vector uv = vector(u, v, 0);
+
+  uv *= Grids;
+  vector gv = fract(uv) - .5;
+  vector id = floor(uv);
+
+  float m = 0.;
+
+  vector p[9];
+  int i = 0;
+  for (int y = -1; y < 1; y++)
+  {
+    for (int x = -1; x < 1; x++)
+    {
+      p[i++] = getPos(id, vector(x, y, 0));
+    }
+  }
+
+  for (int j = 0; j < 9; j++)
+  {
+    m += line(gv, p[4], p[j]);
+  }
+
+  // m += line(gv, p[1], p[3]);
+  // m += line(gv, p[1], p[5]);
+  // m += line(gv, p[7], p[3]);
+  // m += line(gv, p[7], p[5]);
+
+  Cout = 1. - m;
+
+  // vector pnt = getPos(id, vector(0, 0, 0));
+  // Cout = 1. - smoothstep(.503, .01, length(pnt - gv));
+
+  // create borders
+  if (gv[0] > .48 || gv[1] > .48)
+    Cout = color(1, 0, 0);
+}

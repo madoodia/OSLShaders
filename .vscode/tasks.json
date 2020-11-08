@@ -5,13 +5,13 @@
       "type": "shell",
       "label": "build",
       "windows": {
-        "command": "${workspaceFolder}/scripts/build.bat",
+        "command": "${workspaceFolder}/build_scripts/build.bat",
       },
       "linux": {
-        "command": "oslc -v ${workspaceFolder}/src/${fileBasenameNoExtension}.osl -o ${workspaceFolder}/shaders/${fileBasenameNoExtension}.oso",
+        "command": "",
       },
       "osx": {
-        "command": "oslc -v ${workspaceFolder}/src/${fileBasenameNoExtension}.osl -o ${workspaceFolder}/shaders/${fileBasenameNoExtension}.oso",
+        "command": "",
       },
       "args": [
         "${workspaceFolder}",

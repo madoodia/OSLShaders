@@ -239,12 +239,12 @@ shader voronoi_smooth(
 
     vector scale_layers = vector(1.0, 1.0, 1.0),
 
-    output vector result = vector(0.0))
+    output vector Cout = vector(0.0))
 {
   vector pos = P + translate;
   vector uv = pos * scale;
   vector c = voronoi(uv, probability_layer1, probability_layer2, probability_layer3, scale_layers[0], scale_layers[1], scale_layers[2], smoothing);
 
   float remapped = remap(c[0], border_thickness);
-  result = vector(remapped);
+  Cout = vector(remapped);
 }

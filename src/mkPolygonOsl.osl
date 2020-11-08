@@ -1,0 +1,42 @@
+
+shader
+mkPolygonOsl(float numSides = 4,
+             float innerRad = 0.25,
+             float line = 0.02,
+             color bkcolor = 1,
+             color frcolor = color(0, 0, 0.2),
+             float s = 0 [[ int lockgeom = 0, string widget = "null" ]],
+             float t = 0 [[ int lockgeom = 0, string widget = "null" ]],
+             output color Cout = 0)
+{
+  // 1   Convert the current 'st' to polar coordinates
+  //     Note: positive theta is clockwise.
+  float x = s - 0.5, y = t - 0.5;
+  float theta = atan2(y, x); // -PI to PI radians
+  if (theta < 0.0)
+    theta += 2 * M_PI; //  0 to 2PI radians
+
+  // 2   Find the "seqment" in which the current shading point is located.
+  float interior = (2 * M_PI) / numSides;
+  float seqment = floor(theta / interior);
+
+  // 3   Find the angle to (counter) rotate the current shading point.
+  //     Note: positive rotation is anti-clockwise.
+  float rotation = (seqment * interior + interior / 2);
+
+  // 4   Apply the rotation to a 3D point defined by the uv location.
+  point stPnt = point(s - 0.5, 0.5 - t, 0);
+  point origin = point(0, 0, 0);
+  point z_axis = point(0, 0, 1);
+  point rotPnt = rotate(stPnt, rotation, origin, z_axis);
+
+  // 5   Use the x component of the rotated point to determine the
+  //     "proximity" of the current shading point to a polygon edge.
+  //       Using the smoothstep function twice ensures "proximity" is in
+  //     the range 0.0 to 1.0.
+  float proximity = smoothstep(innerRad - line / 2, innerRad, rotPnt[0]) *
+                    (1 - smoothstep(innerRad, innerRad + line / 2, rotPnt[0]));
+
+  // 6   Finally, use "proximity" to output the appropriate color.
+  Cout = mix(bkcolor, frcolor, proximity);
+}
