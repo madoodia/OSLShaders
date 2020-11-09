@@ -3,7 +3,7 @@
 // 2  Constrain the xyz values to the range 0-1 (normalize),
 // 3  Ensure the values are positive (fabs).
 
-shader pnt2color(
+shader mkpnt2color(
     string spacename = "object",
     output color resultRGB = 0)
 {

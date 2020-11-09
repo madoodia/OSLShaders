@@ -6,8 +6,7 @@
 // The value of "id" is used to generate an arbitary color using the
 // cellnoise() function. The technique is based on the method used by
 // Pixar's PxrVisualizer plugin.
-shader
-id2color(
+shader mkid2color(
     float s = 0
         [[
           int lockgeom = 0,
