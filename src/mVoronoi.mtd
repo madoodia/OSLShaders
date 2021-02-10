@@ -1,6 +1,0 @@
-[node mVoronoi]    
-  maya.name               STRING  "mVoronoi"
-  maya.id                 INT     0x000f0002
-  maya.classification		  STRING	"Shader/Surface"
-  maya.output_name        STRING  "outColor"
-  maya.output_shortname   STRING  "out"

@@ -1,6 +1,0 @@
-[node mSimpleDifuse]    
-  maya.name               STRING  "mSimpleDifuse"
-  maya.id                 INT     0x000f0003
-  maya.classification		  STRING	"Shader/Surface"
-  maya.output_name        STRING  "outColor"
-  maya.output_shortname   STRING  "out"

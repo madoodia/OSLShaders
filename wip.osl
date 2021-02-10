@@ -1,38 +1,33 @@
-/* --------------------- */
-/* (C) 2020 madoodia.com */
-/*  All Rights Reserved  */
-/* --------------------- */
 
-vector fract(vector uv)
+shader
+sine3d(float freq = 4,
+       float amp = 0.5,
+       float offset = 0,
+       float blur = 0.05,
+       string spacename = "object",
+       output float resultF = 0,
+       output color Cout = 0)
 {
-  return uv - floor(uv);
-}
+  // Convert the shading point to the object coordinate system.
+  point p = transform(spacename, P);
 
-float fract(float val)
-{
-  return val - floor(val);
-}
+  // Get the coordinates of the shading point.
+  float x = p[0];
+  float z = p[2];
 
-float nvf(vector uv)
-{
-  point p = fract(uv * vector(654.25, 978.16, 0));
-  p += dot(p, p + 25.76);
-  return fract(p.x * p.y);
-}
+  // The arc tangent of the shading point will be in radians
+  // (-3.142 to 3.142) ie -180 to 180 degress.
+  float theta = atan2(x, z);
 
-vector nvv(vector uv)
-{
-  float n = nvf(uv);
-  return vector(n, nvf(uv + n), 0);
-}
+  // Generate a sine wave - remapped to 0 to 1.
+  float wave = (sin(theta * freq) + 1) * 0.5;
 
-shader mPractice2(
-    output color Cout = 0)
-{
-  point center = point(.5, .5, 0);
-  vector uv = vector(u, v, 0);
+  // Adjust the height and position of the sine wave.
+  resultF = wave * amp + offset;
 
-  float m = nvv(uv)[1];
+  // Get a filtered value of the wave height.
+  wave = smoothstep(resultF - blur, resultF + blur, p[1]);
 
-  Cout = m;
+  // Control the mixing of two colors by the wave.
+  Cout = mix(color(1, 1, 1), color(0, 0, 0), wave);
 }
